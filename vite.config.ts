@@ -6,7 +6,11 @@ import {defineConfig} from 'vite';
 import {VitePWA} from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
+  const rawBase = process.env.VITE_BASE_PATH || '/';
+  const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
   return {
+    base,
     plugins: [
       react(),
       tailwindcss(),
@@ -20,7 +24,7 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/',
+          id: base,
           name: 'مرشد النفس والتأثير',
           short_name: 'مرشد النفس',
           description:
@@ -32,25 +36,25 @@ export default defineConfig(() => {
           display: 'standalone',
           display_override: ['standalone', 'minimal-ui'],
           orientation: 'portrait',
-          start_url: '/',
-          scope: '/',
+          start_url: base,
+          scope: base,
           categories: ['lifestyle', 'education', 'health'],
           prefer_related_applications: false,
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: `${base}pwa-192x192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: `${base}pwa-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: `${base}pwa-maskable-512x512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
@@ -61,36 +65,36 @@ export default defineConfig(() => {
               name: 'دائرتي (العائلة والأصحاب)',
               short_name: 'دائرتي',
               description: 'ملفات العائلة والأصحاب وخريطة التأثير',
-              url: '/?tab=circle',
-              icons: [{src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png'}],
+              url: `${base}?tab=circle`,
+              icons: [{src: `${base}pwa-192x192.png`, sizes: '192x192', type: 'image/png'}],
             },
             {
               name: 'مكتبة المعرفة النفسية',
               short_name: 'المعرفة',
               description: 'الشخصيات الصعبة و60 انحيازاً معرفياً',
-              url: '/?tab=knowledge',
-              icons: [{src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png'}],
+              url: `${base}?tab=knowledge`,
+              icons: [{src: `${base}pwa-192x192.png`, sizes: '192x192', type: 'image/png'}],
             },
             {
               name: 'التدريب اليومي',
               short_name: 'التدريب',
               description: 'برنامج 30 يوماً والتنفس وتمارين المرآة',
-              url: '/?tab=training',
-              icons: [{src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png'}],
+              url: `${base}?tab=training`,
+              icons: [{src: `${base}pwa-192x192.png`, sizes: '192x192', type: 'image/png'}],
             },
             {
               name: 'محاكي الحوارات',
               short_name: 'المحاكي',
               description: 'تدريب تفاعلي على المواقف الصعبة',
-              url: '/?tab=simulator',
-              icons: [{src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png'}],
+              url: `${base}?tab=simulator`,
+              icons: [{src: `${base}pwa-192x192.png`, sizes: '192x192', type: 'image/png'}],
             },
           ],
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-          navigateFallback: '/index.html',
+          navigateFallback: `${base}index.html`,
           cleanupOutdatedCaches: true,
         },
         devOptions: {
