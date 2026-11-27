@@ -63,6 +63,7 @@ export type TrainingSubTab =
 interface TrainingSectionProps {
   state: AppState;
   initialSubTab?: TrainingSubTab;
+  navTick?: number;
   onCompleteDay: (day: number) => void;
   onCompleteDailyChallenge: (dateIso: string, xpReward: number) => void;
   onAddMood: (entry: MoodEntry) => void;
@@ -116,6 +117,7 @@ const GROUNDING_STEPS = [
 export const TrainingSection: React.FC<TrainingSectionProps> = ({
   state,
   initialSubTab = 'program',
+  navTick,
   onCompleteDay,
   onCompleteDailyChallenge,
   onAddMood,
@@ -140,7 +142,7 @@ export const TrainingSection: React.FC<TrainingSectionProps> = ({
 
   useEffect(() => {
     setSubTab(initialSubTab);
-  }, [initialSubTab]);
+  }, [initialSubTab, navTick]);
 
   // Breathing & Grounding Timer State
   const [breathType, setBreathType] = useState<'box' | 'calm478' | 'grounding'>('box');

@@ -98,6 +98,7 @@ export default function App() {
   const [circleSubTab, setCircleSubTab] = useState<CircleSubTab>('profiles');
   const [knowledgeSubTab, setKnowledgeSubTab] = useState<KnowledgeTab>('difficult');
   const [simulatorSubTab, setSimulatorSubTab] = useState<SimSubTab>('scenarios');
+  const [navTick, setNavTick] = useState(0);
   const [simInitPersonality, setSimInitPersonality] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [showEthicsManual, setShowEthicsManual] = useState(false);
@@ -631,6 +632,7 @@ export default function App() {
 
   const handlePracticeInSimulator = useCallback((personalityId: string) => {
     setSimulatorSubTab('scenarios');
+    setNavTick((n) => n + 1);
     setSimInitPersonality(personalityId);
     setActiveTab('simulator');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -639,6 +641,7 @@ export default function App() {
   const handleOpenSoundStudio = useCallback(() => {
     triggerHaptic(10);
     setTrainingSubTab('sounds');
+    setNavTick((n) => n + 1);
     setActiveTab('training');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -650,6 +653,7 @@ export default function App() {
       if (target.circleSubTab) setCircleSubTab(target.circleSubTab);
       if (target.knowledgeSubTab) setKnowledgeSubTab(target.knowledgeSubTab);
       if (target.simulatorSubTab) setSimulatorSubTab(target.simulatorSubTab);
+      setNavTick((n) => n + 1);
       if (target.tab !== activeTab) {
         try {
           window.history.pushState(
@@ -679,6 +683,7 @@ export default function App() {
       } else if (tab === 'simulator') {
         setSimulatorSubTab('scenarios');
       }
+      setNavTick((n) => n + 1);
       if (tab !== activeTab) {
         try {
           window.history.pushState({ tab }, '', tab === 'home' ? '/' : `/?tab=${tab}`);
@@ -874,6 +879,7 @@ export default function App() {
               selfProfile={state.selfProfile}
               biasQuiz={state.biasQuiz}
               initialSubTab={circleSubTab}
+              navTick={navTick}
               noteCryptoKey={noteCryptoKey}
               notesEncrypted={Boolean(lockConfig.enabled && lockConfig.encryptNotes)}
               onAddPerson={handleAddPerson}
@@ -891,6 +897,7 @@ export default function App() {
             <KnowledgeSection
               state={state}
               initialSubTab={knowledgeSubTab}
+              navTick={navTick}
               favoriteIds={state.favoriteKnowledgeIds}
               onToggleFavorite={handleToggleFavoriteKnowledge}
               onPracticeInSimulator={handlePracticeInSimulator}
@@ -901,6 +908,7 @@ export default function App() {
             <TrainingSection
               state={state}
               initialSubTab={trainingSubTab}
+              navTick={navTick}
               onNavigateTo={handleNavigateTo}
               onCompleteDay={handleCompleteDay}
               onCompleteDailyChallenge={handleCompleteDailyChallenge}
@@ -927,6 +935,7 @@ export default function App() {
               state={state}
               simResults={state.simResults}
               initialSubTab={simulatorSubTab}
+              navTick={navTick}
               initialPersonalityId={simInitPersonality}
               onClearInitialPersonality={() => setSimInitPersonality(null)}
               onSaveResult={handleSaveSimResult}

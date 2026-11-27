@@ -50,6 +50,7 @@ interface CircleSectionProps {
   selfProfile: SelfProfileData;
   biasQuiz: BiasQuizState;
   initialSubTab?: CircleSubTab;
+  navTick?: number;
   noteCryptoKey: CryptoKey | null;
   notesEncrypted: boolean;
   onAddPerson: (person: PersonProfile) => void;
@@ -85,6 +86,7 @@ export const CircleSection: React.FC<CircleSectionProps> = ({
   selfProfile,
   biasQuiz,
   initialSubTab = 'profiles',
+  navTick,
   noteCryptoKey,
   notesEncrypted,
   onAddPerson,
@@ -108,7 +110,7 @@ export const CircleSection: React.FC<CircleSectionProps> = ({
     if (initialSubTab !== 'profiles') {
       setSelectedId(null);
     }
-  }, [initialSubTab]);
+  }, [initialSubTab, navTick]);
 
   const selfSynth = useMemo(() => analyzeDeepSelf(selfProfile, biasQuiz), [selfProfile, biasQuiz]);
 

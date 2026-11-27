@@ -26,6 +26,7 @@ interface SimulatorSectionProps {
   state: AppState;
   simResults: Record<string, SimResultRecord>;
   initialSubTab?: SimSubTab;
+  navTick?: number;
   initialPersonalityId?: string | null;
   onClearInitialPersonality: () => void;
   onSaveResult: (scenarioId: string, score: number) => void;
@@ -42,6 +43,7 @@ export const SimulatorSection: React.FC<SimulatorSectionProps> = ({
   state,
   simResults,
   initialSubTab,
+  navTick,
   initialPersonalityId,
   onClearInitialPersonality,
   onSaveResult,
@@ -61,7 +63,7 @@ export const SimulatorSection: React.FC<SimulatorSectionProps> = ({
       setCurrentNodeId(null);
       setFinished(false);
     }
-  }, [initialSubTab]);
+  }, [initialSubTab, navTick]);
 
   // Boundaries & Listening copy feedback
   const [copiedId, setCopiedId] = useState<string | null>(null);

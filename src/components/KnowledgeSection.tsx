@@ -37,6 +37,7 @@ export type KnowledgeTab =
 interface KnowledgeSectionProps {
   state: AppState;
   initialSubTab?: KnowledgeTab;
+  navTick?: number;
   favoriteIds: string[];
   onToggleFavorite: (id: string) => void;
   onPracticeInSimulator: (personalityId: string) => void;
@@ -45,6 +46,7 @@ interface KnowledgeSectionProps {
 export const KnowledgeSection: React.FC<KnowledgeSectionProps> = ({
   state,
   initialSubTab,
+  navTick,
   favoriteIds,
   onToggleFavorite,
   onPracticeInSimulator,
@@ -77,7 +79,7 @@ export const KnowledgeSection: React.FC<KnowledgeSectionProps> = ({
       setTab(initialSubTab);
       setSelectedPersonality(null);
     }
-  }, [initialSubTab]);
+  }, [initialSubTab, navTick]);
 
   const handleCopy = async (key: string, text: string) => {
     await copyToClipboard(text);
