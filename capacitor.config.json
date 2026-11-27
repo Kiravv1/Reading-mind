@@ -1,0 +1,17 @@
+{
+  "appId": "com.murshidalnafs.app",
+  "appName": "مرشد النفس والتأثير",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#0B0D12",
+    "allowMixedContent": false
+  },
+  "ios": {
+    "backgroundColor": "#0B0D12",
+    "contentInset": "automatic"
+  }
+}

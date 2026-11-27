@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, "Noto Sans Arabic", "Geeza Pro", "Helvetica Neue", Arial, sans-serif;
+    background-color: #0B0D12;
+    color: #F2EFE9;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: #0B0D12;
+    color: #F2EFE9;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+    line-height: 1.65;
+  }
+
+  button, a {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.safe-pb,
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-pt,
+.pt-safe {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+/* 3D Flip Card utilities */
+.flip-scene {
+  perspective: 1400px;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-view {
+  animation: fadeSlideUp 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-view {
+    animation: none;
+  }
+  .flip-card {
+    transition-duration: 0.01ms !important;
+  }
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0D12;
+}
+::-webkit-scrollbar-thumb {
+  background: #272B38;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A4052;
+}
